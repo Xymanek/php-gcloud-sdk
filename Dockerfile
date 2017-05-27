@@ -1,11 +1,14 @@
 FROM chialab/php:7.0
 MAINTAINER xymanek <xymanek@outlook.com>
 
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get install -y -qq --no-install-recommends wget unzip python openssh-client python-openssl && apt-get clean
+
 # Install the Google Cloud SDK.
 ENV HOME /
 ENV CLOUDSDK_PYTHON_SITEPACKAGES 1
 RUN wget https://dl.google.com/dl/cloudsdk/channels/rapid/google-cloud-sdk.zip && unzip google-cloud-sdk.zip && rm google-cloud-sdk.zip
-RUN google-cloud-sdk/install.sh --usage-reporting=true --path-update=true --bash-completion=true --rc-path=/.bashrc --additional-components app alpha beta pubsub-emulator cloud-datastore-emulator app-engine-php
+RUN google-cloud-sdk/install.sh --usage-reporting=true --path-update=true --bash-completion=true --rc-path=/.bashrc --additional-components app alpha beta app-engine-php
 
 # Disable updater check for the whole installation.
 # Users won't be bugged with notifications to update to the latest version of gcloud.
