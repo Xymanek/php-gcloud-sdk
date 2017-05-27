@@ -2,7 +2,7 @@ FROM chialab/php:7.0
 MAINTAINER xymanek <xymanek@outlook.com>
 
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get install -y -qq --no-install-recommends wget unzip python openssh-client python-openssl && apt-get clean
+RUN  apt-get update && apt-get install -y -qq --no-install-recommends wget unzip python openssh-client python-openssl && apt-get clean
 
 # Install the Google Cloud SDK.
 ENV HOME /
